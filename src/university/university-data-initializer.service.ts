@@ -19,7 +19,7 @@ export class UniversityDataInitializerService
     async onModuleInit(): Promise<void> {
        
         console.log('(University) is initialized...');
-     // await this.universityModel.deleteMany({});
+     await this.universityModel.deleteMany({});
         const universityData = await lastValueFrom(this.httpService.get( `${URL}`, {}))
         const universityArr = []
         for (const university of universityData.data) {

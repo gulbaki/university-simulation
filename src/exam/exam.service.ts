@@ -33,7 +33,7 @@ export class UniversityService {
         await this.examModel.create(examArr)
         const remDup = e => [...new Set(e)].sort().join("");
         const examQuestions = await this.examModel.find({}, { questions: 1 });
-        const students = await this.studentModel.find({}, { name: 1, surname: 1, points: 1 });
+        const students = await this.studentModel.find({}, { name: 1, surname: 1, points:1 });
 
         const studentWithScore = [];
         for (const student of students) {
@@ -55,16 +55,12 @@ export class UniversityService {
                 }
             )
         }
-        this.studentModel.bulkWrite(studentWithScore)
+        await this.studentModel.bulkWrite(studentWithScore)
 
 
         const studentsUniversity = await this.studentModel.find({}, { name: 1, surname: 1, points: 1 }).sort({ points: -1 });
         const universities = await this.universityModel.find({}, { _id: 1 }).sort({ _id: 1 });
-        const studentWIN = [];
         let res = []
-
-
-
         const chunkedArray = studentsUniversity.reduce((resultArray, item, index) => {
             const chunkIndex = Math.floor(index / 5)
 
