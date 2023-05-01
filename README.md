@@ -22,8 +22,22 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
+
+
+## ec2 http://ec2-54-173-188-203.compute-1.amazonaws.com/api/v1/docs
 ## Description
 
+API name
+api ollang
+Integrations
+ANY http://ec2-54-173-188-203.compute-1.amazonaws.com/students (HTTP)
+ANY http://ec2-54-173-188-203.compute-1.amazonaws.com/universities (HTTP)
+ANY http://ec2-54-173-188-203.compute-1.amazonaws.com/exam/start-exam (HTTP)
+##
+Routes
+ANY /students → ANY http://ec2-54-173-188-203.compute-1.amazonaws.com/students (HTTP)
+ANY /universities → ANY http://ec2-54-173-188-203.compute-1.amazonaws.com/universities (HTTP)
+ANY /exam/start-exam → ANY http://ec2-54-173-188-203.compute-1.amazonaws.com/exam/start-exam (HTTP)
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
 ## Installation
