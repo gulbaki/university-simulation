@@ -21,12 +21,12 @@ const StudentSchema = new Schema<Student>(
   { timestamps: true },
 );
 
-StudentSchema.methods.getFullName = function() {
-  return this.name + this.surname
-}
+StudentSchema.methods.getFullName = function () {
+  return this.name + this.surname;
+};
 
-
-const createStudentModel: (conn: Connection) => StudentModel = (conn: Connection) =>
-  conn.model<Student>('Student', StudentSchema, 'students');
+const createStudentModel: (conn: Connection) => StudentModel = (
+  conn: Connection,
+) => conn.model<Student>('Student', StudentSchema, 'students');
 
 export { Student, StudentModel, createStudentModel };

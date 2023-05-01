@@ -5,9 +5,9 @@ import { Student } from './student.model';
 interface Exam extends Document {
   readonly date?: Date;
   readonly questions: string[];
-  readonly results:  {
+  readonly results: {
     student: Partial<Student>;
-    point: number
+    point: number;
   };
   readonly university?: Partial<University>;
 }

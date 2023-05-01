@@ -8,6 +8,6 @@ import { HttpModule } from '@nestjs/axios';
   imports: [DatabaseModule, HttpModule],
   providers: [UniversityService, UniversityDataInitializerService],
   exports: [UniversityService],
-  controllers: [ UniversityController],
+  controllers: [UniversityController],
 })
 export class UniversityModule {}

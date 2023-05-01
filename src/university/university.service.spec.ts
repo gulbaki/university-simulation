@@ -9,9 +9,7 @@ describe('UniversityService', () => {
       providers: [
         {
           provide: UniversityService,
-          useValue: {
-
-          },
+          useValue: {},
         },
       ],
     }).compile();

@@ -1,9 +1,9 @@
 jest.mock('mongoose', () => ({
-    createConnection: jest.fn().mockImplementation(
-      (uri:any, options:any)=>({} as any)
-      ),
-    Connection: jest.fn()
-  }))
+  createConnection: jest
+    .fn()
+    .mockImplementation((uri: any, options: any) => ({} as any)),
+  Connection: jest.fn(),
+}));
 
 import { ConfigModule } from '@nestjs/config';
 import { Test, TestingModule } from '@nestjs/testing';
@@ -24,8 +24,6 @@ describe('DatabaseConnectionProviders', () => {
     conn = module.get<Connection>(DATABASE_CONNECTION);
   });
 
-
-
   it('DATABASE_CONNECTION should be defined', () => {
     expect(conn).toBeDefined();
   });
@@ -33,12 +31,14 @@ describe('DatabaseConnectionProviders', () => {
   it('connect is called', () => {
     //expect(conn).toBeDefined();
     //expect(createConnection).toHaveBeenCalledTimes(1); // it is 2 here. why?
-    expect(createConnection).toHaveBeenCalledWith("mongodb+srv://root:root@cluster0.so5im.mongodb.net/test-case", {
-      // useNewUrlParser: true,
-      // useUnifiedTopology: true,
-      //see: https://mongoosejs.com/docs/deprecations.html#findandmodify
-      // useFindAndModify: false
-    });
-  })
-
+    expect(createConnection).toHaveBeenCalledWith(
+      'mongodb+srv://root:root@cluster0.so5im.mongodb.net/test-case',
+      {
+        // useNewUrlParser: true,
+        // useUnifiedTopology: true,
+        //see: https://mongoosejs.com/docs/deprecations.html#findandmodify
+        // useFindAndModify: false
+      },
+    );
+  });
 });

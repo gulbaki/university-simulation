@@ -9,7 +9,6 @@ import { createStudentModel } from './student.model';
 import { createUniversityModel } from './university.model';
 import { createExamModel } from './exam.model';
 
-
 export const databaseModelsProviders = [
   {
     provide: STUDENT_MODEL,

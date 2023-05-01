@@ -1,15 +1,15 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { Connection, Model } from 'mongoose';
 import {
-    DATABASE_CONNECTION,
-    STUDENT_MODEL,
-    UNIVERSITY_MODEL,
-    EXAM_MODEL,
+  DATABASE_CONNECTION,
+  STUDENT_MODEL,
+  UNIVERSITY_MODEL,
+  EXAM_MODEL,
 } from './database.constants';
 import { databaseModelsProviders } from './database-models.providers';
 import { Student, StudentModel } from './student.model';
-import {  University, UniversityModel } from './university.model';
-import {  Exam, ExamModel } from './exam.model';
+import { University, UniversityModel } from './university.model';
+import { Exam, ExamModel } from './exam.model';
 
 describe('DatabaseModelsProviders', () => {
   let conn: any;

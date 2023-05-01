@@ -12,7 +12,7 @@ import { ExamModule } from './exam/exam.module';
     ConfigModule.forRoot({ ignoreEnvFile: true }),
     StudentModule,
     UniversityModule,
-    ExamModule
+    ExamModule,
   ],
   controllers: [AppController],
   providers: [AppService],

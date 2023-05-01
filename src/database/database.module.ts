@@ -9,4 +9,4 @@ import { databaseModelsProviders } from './database-models.providers';
   providers: [...databaseConnectionProviders, ...databaseModelsProviders],
   exports: [...databaseConnectionProviders, ...databaseModelsProviders],
 })
-export class DatabaseModule { }
+export class DatabaseModule {}

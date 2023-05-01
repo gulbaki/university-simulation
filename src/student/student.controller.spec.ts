@@ -10,8 +10,7 @@ describe('UserController', () => {
       providers: [
         {
           provide: StudentService,
-          useValue: {
-          },
+          useValue: {},
         },
       ],
       controllers: [StudentController],
@@ -23,5 +22,4 @@ describe('UserController', () => {
   it('should be defined', () => {
     expect(controller).toBeDefined();
   });
-
 });
