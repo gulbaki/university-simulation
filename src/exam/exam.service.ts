@@ -1,6 +1,5 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
 import { EMPTY, from, lastValueFrom, Observable, of, throwError } from 'rxjs';
-import { mergeMap, tap, throwIfEmpty, catchError, map } from 'rxjs/operators';
 import { EXAM_MODEL, STUDENT_MODEL, UNIVERSITY_MODEL } from '../database/database.constants';
 import { ExamDto } from './exam.dto';
 import { Exam, ExamModel } from 'src/database/exam.model';
@@ -11,7 +10,7 @@ import { HttpService } from '@nestjs/axios';
 
 const URL = "https://wikimedia.org/api/rest_v1/metrics/pageviews/top/tr.wikipedia/all-access"
 @Injectable()
-export class UniversityService {
+export class ExamService {
     constructor(
         @Inject(EXAM_MODEL) private examModel: ExamModel,
         @Inject(STUDENT_MODEL) private studentModel: StudentModel,
