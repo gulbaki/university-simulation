@@ -21,7 +21,7 @@ export class ExamDataInitializerService
         const fullDate = `${oneDaysAgo.getFullYear()}/${oneDaysAgo.getMonth() + 1  < 10 ?  "0" + (oneDaysAgo.getMonth()) :  oneDaysAgo.getMonth() + 1 }/${oneDaysAgo.getDate()}`
        
         console.log('(Exam) is initialized...');
-      //  await this.examModel.deleteMany({});
+        await this.examModel.deleteMany({});
         const examData = await lastValueFrom(this.httpService.get( `${URL}/${fullDate}`, {}))
         const examArr = []
         for (const exam of examData.data.items[0].articles) {
@@ -35,7 +35,7 @@ export class ExamDataInitializerService
 
         await Promise.all(
             [
-                //this.examModel.create(examArr),
+                this.examModel.create(examArr),
             ]
         ).then(
             data => console.log(data)

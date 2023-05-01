@@ -17,6 +17,6 @@ describe('mongodbConfig', () => {
   });
 
   it('should contains uri key', async () => {
-    expect(config.uri).toBe('mongodb://localhost/case-study');
+    expect(config.uri).toBe('mongodb+srv://root:root@cluster0.so5im.mongodb.net/test-case');
   });
 });

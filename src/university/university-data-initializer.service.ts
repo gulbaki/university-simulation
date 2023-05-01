@@ -33,7 +33,7 @@ export class UniversityDataInitializerService
 
         await Promise.all(
             [
-        //   this.universityModel.create(universityArr),
+           this.universityModel.create(universityArr),
             ]
         ).then(
             data => console.log(data)

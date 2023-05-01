@@ -33,7 +33,7 @@ describe('DatabaseConnectionProviders', () => {
   it('connect is called', () => {
     //expect(conn).toBeDefined();
     //expect(createConnection).toHaveBeenCalledTimes(1); // it is 2 here. why?
-    expect(createConnection).toHaveBeenCalledWith("mongodb://localhost/case-study", {
+    expect(createConnection).toHaveBeenCalledWith("mongodb+srv://root:root@cluster0.so5im.mongodb.net/test-case", {
       // useNewUrlParser: true,
       // useUnifiedTopology: true,
       //see: https://mongoosejs.com/docs/deprecations.html#findandmodify

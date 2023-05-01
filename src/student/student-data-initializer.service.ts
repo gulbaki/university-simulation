@@ -18,7 +18,7 @@ export class UserDataInitializerService
 
     async onModuleInit(): Promise<void> {
         console.log('(StudentModule) is initialized...');
-       // await this.studentModel.deleteMany({});
+       await this.studentModel.deleteMany({});
         const studentData = await lastValueFrom(this.httpService.get(URL, {}))
         const studentArr = []
         for (const student of studentData.data.results) {
@@ -35,7 +35,7 @@ export class UserDataInitializerService
 
         await Promise.all(
             [
-             //  this.studentModel.create(studentArr),
+             this.studentModel.create(studentArr),
             ]
         ).then(
             data => console.log(data)
