@@ -20,7 +20,7 @@ export class UniversityService {
         const UniversityQuery = await this.UniversityModel.aggregate([
             {
                 "$match": {
-                    _id: new Types.ObjectId("644f723f26852e1a5a2bf32a")
+                    _id: new Types.ObjectId(id)
                 },
             },
             {

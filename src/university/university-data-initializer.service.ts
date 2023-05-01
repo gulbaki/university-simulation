@@ -36,7 +36,7 @@ export class UniversityDataInitializerService
            this.universityModel.create(universityArr),
             ]
         ).then(
-            data => console.log(data)
+          //  data => console.log(data)
         );
     }
 

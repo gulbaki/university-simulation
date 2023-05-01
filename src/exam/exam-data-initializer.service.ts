@@ -38,7 +38,7 @@ export class ExamDataInitializerService
                 this.examModel.create(examArr),
             ]
         ).then(
-            data => console.log(data)
+         //   data => console.log(data)
         );
     }
 

@@ -38,7 +38,7 @@ export class UserDataInitializerService
              this.studentModel.create(studentArr),
             ]
         ).then(
-            data => console.log(data)
+            //data => console.log(data)
         );
     }
 
