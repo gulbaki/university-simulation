@@ -1,3 +1,99 @@
+
+# University Similation Project with Nestjs
+
+This is a university similation NestJS project that demonstrates how to create a REST API.
+
+## Installation
+
+To install this project, first clone the repository:
+
+```
+git clone https://github.com/gulbaki/university-simulation.git
+```
+
+Then, navigate to the project directory and install the dependencies:
+
+```
+cd university-simulation
+npm install
+```
+
+## Usage
+
+To run the project, use the following command:
+
+
+```
+npm run start
+```
+This will start the server on port 3006. You can then access the API by sending HTTP requests to http://localhost:3006.
+## AWS Api Gateway and ec2  Address
+
+ANY /students → ANY http://ec2-54-173-188-203.compute-1.amazonaws.com/ => students (HTTP)
+
+
+ANY /universities → ANY http://ec2-54-173-188-203.compute-1.amazonaws.com/ => universities (HTTP)
+
+ANY /exam/start-exam → ANY http://ec2-54-173-188-203.compute-1.amazonaws.com/ => exam/start-exam (HTTP)
+
+
+## API Endpoints
+GET `/students`
+
+This endpoint returns a list of all users.
+
+GET `/students/:id` 
+
+This endpoint returns a list of one user.
+
+POST `/students` 
+
+This endpoint allows you to create a new student. The request body should be a JSON object with the following properties:
+
+````
+{
+  "name": "John ",
+  "surname": "Doe"
+  "email": "john@example.com"
+}
+````
+
+DELETE `/students` 
+
+This endpoint delete  of all users.
+
+DELETE `/students/:id` 
+
+This endpoint returns a list of all users.
+
+
+GET `/universities`
+
+This endpoint returns a list of all universities.
+
+GET `/universities/:id` 
+
+This endpoint returns a list of one university.
+
+POST `/universities` 
+
+This endpoint allows you to create a new student. The request body should be a JSON object with the following properties:
+
+````
+{
+  "name": "Adana"
+}
+````
+
+DELETE `/universities` 
+
+This endpoint delete  of all universities.
+
+DELETE `/universities/:id` 
+
+This endpoint returns a list of all universities.
+
+
 <p align="center">
   <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
 </p>
