@@ -1,13 +1,12 @@
-import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { EMPTY, from, lastValueFrom, Observable, of, throwError } from 'rxjs';
+import { Inject, Injectable } from '@nestjs/common';
+import { lastValueFrom } from 'rxjs';
 import {
   EXAM_MODEL,
   STUDENT_MODEL,
   UNIVERSITY_MODEL,
 } from '../database/database.constants';
-import { ExamDto } from './exam.dto';
-import { Exam, ExamModel } from 'src/database/exam.model';
-import { Student, StudentModel } from 'src/database/student.model';
+import { ExamModel } from 'src/database/exam.model';
+import { StudentModel } from 'src/database/student.model';
 import { UniversityModel } from 'src/database/university.model';
 import { HttpService } from '@nestjs/axios';
 
@@ -98,7 +97,11 @@ export class ExamService {
         },
       });
     }
-    this.universityModel.bulkWrite(res);
+
+    const updatedPoint = await this.universityModel.bulkWrite(res);
+    if (updatedPoint.matchedCount > 0) return true;
+
+    return false;
   }
 
   public calculateScore(studentName, articleTitle) {

@@ -20,7 +20,11 @@ export class ExamDataInitializerService implements OnModuleInit {
       oneDaysAgo.getMonth() + 1 < 10
         ? '0' + oneDaysAgo.getMonth()
         : oneDaysAgo.getMonth() + 1
-    }/${oneDaysAgo.getDate()}`;
+    }/${
+      oneDaysAgo.getDate() < 10
+        ? '0' + oneDaysAgo.getDate()
+        : oneDaysAgo.getDate()
+    }`;
 
     console.log('(Exam) is initialized...');
     await this.examModel.deleteMany({});

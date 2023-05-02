@@ -1,30 +1,24 @@
-import {
-  Controller,
-  DefaultValuePipe,
-  Get,
-  Post,
-  Delete,
-  Param,
-  Query,
-  Body,
-  ParseIntPipe,
-  Res,
-  Response,
-  HttpCode,
-} from '@nestjs/common';
-import { Exam } from '../database/exam.model';
-import { Observable, map } from 'rxjs';
+import { Controller, Get, Query, Res } from '@nestjs/common';
 import { ExamService } from './exam.service';
-import { ExamDto } from './exam.dto';
 import { ApiProperty, ApiQuery } from '@nestjs/swagger';
-import { IsDate } from 'class-validator';
-import { Type } from 'class-transformer';
+
+export class ExamQueryDto {
+  @ApiProperty({ default: '2023/03/05', required: false })
+  date: string;
+}
 
 @Controller({ path: '/exam' })
 export class ExamController {
   constructor(private ExamService: ExamService) {}
+
+  @ApiQuery({ type: ExamQueryDto })
   @Get('start-exam')
-  startExam(@Query('exam-date') date?: string) {
-    return this.ExamService.startExam(date);
+  async startExam(@Query('date') date = '2023/03/05', @Res() res: any) {
+    if (await this.ExamService.startExam(date)) {
+      return res
+        .status(200)
+        .send({ message: 'exam and university placement completed' });
+    }
+    return res.status(500).send({ message: 'unexpected error' });
   }
 }
