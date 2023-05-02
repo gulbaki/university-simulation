@@ -28,6 +28,10 @@ npm run start
 ```
 This will start the server on port 3006. You can then access the API by sending HTTP requests to http://localhost:3006.
 
+
+## SWAGGER PATH
+
+http://ec2-54-175-173-6.compute-1.amazonaws.com/api/v1/docs#/
 ## Ec2  Address
 
 http://ec2-54-175-173-6.compute-1.amazonaws.com/
