@@ -33,12 +33,12 @@ This will start the server on port 3006. You can then access the API by sending 
 http://ec2-54-175-173-6.compute-1.amazonaws.com/
   
 ## AWS Api Gateway   Addres
-ANY /students → ANY https://sth4s21hh5.execute-api.us-east-1.amazonaws.com/ => students (HTTP)
+ANY /students → ANY https://vjyvtcll2l.execute-api.us-east-1.amazonaws.com/v1 => students (HTTP)
 
 
-ANY /universities → ANY https://sth4s21hh5.execute-api.us-east-1.amazonaws.com => universities (HTTP)
+ANY /universities → ANY https://vjyvtcll2l.execute-api.us-east-1.amazonaws.com/v1 => universities (HTTP)
 
-ANY /exam/start-exam → ANY https://sth4s21hh5.execute-api.us-east-1.amazonaws.com => exam/start-exam (HTTP)
+ANY /exam/start-exam → ANY https://vjyvtcll2l.execute-api.us-east-1.amazonaws.com/v1 => exam/start-exam (HTTP)
 
 
 ## API Endpoints
