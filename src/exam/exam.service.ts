@@ -21,32 +21,38 @@ export class ExamService {
     private readonly httpService: HttpService,
   ) {}
   public async startExam(date): Promise<any> {
-    const examData = await lastValueFrom(
-      this.httpService.get(`${URL}/${date}`, {}),
-    );
+    // const examData = await lastValueFrom(
+    //   this.httpService.get(`${URL}/${date}`, {}),
+    // );
     const examArr = [];
-    await this.examModel.deleteMany({});
+    // await this.examModel.deleteMany({});
+
+    const [examData] = await Promise.all([
+      lastValueFrom(this.httpService.get(`${URL}/${date}`, {})),
+      this.examModel.deleteMany({}),
+    ]);
     for (const exam of examData.data.items[0].articles) {
       examArr.push({
         questions: exam.article,
       });
     }
-    await this.examModel.create(examArr);
-    const remDup = (e) => [...new Set(e)].sort().join('');
-    const examQuestions = await this.examModel.find({}, { questions: 1 });
+    // await this.examModel.create(examArr);
+
+    // const examQuestions = await this.examModel.find({}, { questions: 1 });
     const students = await this.studentModel.find(
       {},
       { name: 1, surname: 1, points: 1 },
     );
 
     const studentWithScore = [];
+
     for (const student of students) {
-      const clearStudent = remDup(student.name + student.surname);
+      const clearStudent = this.remDup(student.name + student.surname);
       let points = 0;
-      for (const examQuestion of examQuestions) {
+      for (const examQuestion of examArr) {
         points += this.calculateScore(
           clearStudent,
-          remDup(examQuestion.questions),
+          this.remDup(examQuestion.questions),
         );
       }
 
@@ -61,12 +67,12 @@ export class ExamService {
     }
     await this.studentModel.bulkWrite(studentWithScore);
 
-    const studentsUniversity = await this.studentModel
-      .find({}, { name: 1, surname: 1, points: 1 })
-      .sort({ points: -1 });
-    const universities = await this.universityModel
-      .find({}, { _id: 1 })
-      .sort({ _id: 1 });
+    const [studentsUniversity, universities] = await Promise.all([
+      this.studentModel
+        .find({}, { name: 1, surname: 1, points: 1 })
+        .sort({ points: -1 }),
+      this.universityModel.find({}, { _id: 1 }).sort({ _id: 1 }),
+    ]);
     const res = [];
     const chunkedArray = studentsUniversity.reduce(
       (resultArray, item, index) => {
@@ -103,6 +109,8 @@ export class ExamService {
 
     return false;
   }
+
+  public remDup = (e) => [...new Set(e)].sort().join('');
 
   public calculateScore(studentName, articleTitle) {
     let score = 0;
