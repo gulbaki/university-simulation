@@ -36,16 +36,14 @@ export class ExamService {
         questions: exam.article,
       });
     }
-    // await this.examModel.create(examArr);
-
-    // const examQuestions = await this.examModel.find({}, { questions: 1 });
+   
     const students = await this.studentModel.find(
       {},
       { name: 1, surname: 1, points: 1 },
     );
 
     const studentWithScore = [];
-
+    const sortedStudentScore = [];
     for (const student of students) {
       const clearStudent = this.remDup(student.name + student.surname);
       let points = 0;
@@ -56,6 +54,10 @@ export class ExamService {
         );
       }
 
+      sortedStudentScore.push({
+        points: points,
+        _id: student._id,
+      });
       student.points = points;
       studentWithScore.push({
         updateOne: {
@@ -65,16 +67,16 @@ export class ExamService {
         },
       });
     }
-    await this.studentModel.bulkWrite(studentWithScore);
+    sortedStudentScore.sort(function (a, b) {
+      return b.points - a.points;
+    });
+    this.studentModel.bulkWrite(studentWithScore);
 
-    const [studentsUniversity, universities] = await Promise.all([
-      this.studentModel
-        .find({}, { name: 1, surname: 1, points: 1 })
-        .sort({ points: -1 }),
+    const [universities] = await Promise.all([
       this.universityModel.find({}, { _id: 1 }).sort({ _id: 1 }),
     ]);
     const res = [];
-    const chunkedArray = studentsUniversity.reduce(
+    const chunkedArray = sortedStudentScore.reduce(
       (resultArray, item, index) => {
         const chunkIndex = Math.floor(index / 5);
 
