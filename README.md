@@ -27,14 +27,18 @@ To run the project, use the following command:
 npm run start
 ```
 This will start the server on port 3006. You can then access the API by sending HTTP requests to http://localhost:3006.
-## AWS Api Gateway and ec2  Address
 
-ANY /students → ANY http://ec2-54-173-188-203.compute-1.amazonaws.com/ => students (HTTP)
+## Ec2  Address
+
+http://ec2-54-175-173-6.compute-1.amazonaws.com/
+  
+## AWS Api Gateway   Addres
+ANY /students → ANY https://sth4s21hh5.execute-api.us-east-1.amazonaws.com/ => students (HTTP)
 
 
-ANY /universities → ANY http://ec2-54-173-188-203.compute-1.amazonaws.com/ => universities (HTTP)
+ANY /universities → ANY https://sth4s21hh5.execute-api.us-east-1.amazonaws.com => universities (HTTP)
 
-ANY /exam/start-exam → ANY http://ec2-54-173-188-203.compute-1.amazonaws.com/ => exam/start-exam (HTTP)
+ANY /exam/start-exam → ANY https://sth4s21hh5.execute-api.us-east-1.amazonaws.com => exam/start-exam (HTTP)
 
 
 ## API Endpoints
