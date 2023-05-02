@@ -1,5 +1,6 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { lastValueFrom } from 'rxjs';
+import  { performance } from 'perf_hooks';
 import {
   EXAM_MODEL,
   STUDENT_MODEL,
@@ -24,6 +25,7 @@ export class ExamService {
     // const examData = await lastValueFrom(
     //   this.httpService.get(`${URL}/${date}`, {}),
     // );
+    performance.mark("example-start")
     const examArr = [];
     // await this.examModel.deleteMany({});
 
@@ -33,10 +35,11 @@ export class ExamService {
     ]);
     for (const exam of examData.data.items[0].articles) {
       examArr.push({
-        questions: exam.article,
+        questions: this.remDup(exam.article),
       });
+      // you must add reguler question title
     }
-   
+
     const students = await this.studentModel.find(
       {},
       { name: 1, surname: 1, points: 1 },
@@ -48,10 +51,7 @@ export class ExamService {
       const clearStudent = this.remDup(student.name + student.surname);
       let points = 0;
       for (const examQuestion of examArr) {
-        points += this.calculateScore(
-          clearStudent,
-          this.remDup(examQuestion.questions),
-        );
+        points += this.calculateScore(clearStudent, examQuestion.questions);
       }
 
       sortedStudentScore.push({
@@ -107,6 +107,8 @@ export class ExamService {
     }
 
     const updatedPoint = await this.universityModel.bulkWrite(res);
+    performance.mark("example-end")
+    console.log(performance.measure("example", "example-start", "example-end"))
     if (updatedPoint.matchedCount > 0) return true;
 
     return false;
