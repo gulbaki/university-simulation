@@ -14,11 +14,14 @@ export class ExamController {
   @ApiQuery({ type: ExamQueryDto })
   @Get('start-exam')
   async startExam(@Query('date') date = '2023/03/05', @Res() res: any) {
-    if (await this.ExamService.startExam(date)) {
-      return res
-        .status(200)
-        .send({ message: 'exam and university placement completed' });
+
+    const result =  await this.ExamService.startExam(date)
+    if (typeof result.message != "undefined") {
+      return res.status(500).send({message: result.message});
     }
-    return res.status(500).send({ message: 'unexpected error' });
+    return res
+    .status(200)
+    .send({ message: 'exam and university placement completed' });
+    
   }
 }

@@ -29,10 +29,17 @@ export class ExamService {
     const examArr = [];
     // await this.examModel.deleteMany({});
 
-    const [examData] = await Promise.all([
-      lastValueFrom(this.httpService.get(`${URL}/${date}`, {})),
-    ]);
-    for (const exam of examData.data.items[0].articles) {
+    const examData = await Promise.all([
+      lastValueFrom(this.httpService.get(`${URL}/${date}`, {}))
+    ]).catch((err) => {
+     return err
+  })
+
+  if(typeof  examData.message != 'undefined'  ) return examData
+
+
+   
+    for (const exam of examData[0].data.items[0].articles) {
       examArr.push({
         questions: this.remDup(exam.article),
       });
@@ -112,7 +119,7 @@ export class ExamService {
     console.log(performance.measure("example", "example-start", "example-end"))
     if (updatedPoint.matchedCount > 0) return true;
 
-    return false;
+    return { message: "Database operetion error"};
   }
 
   public remDup = (e) => [...new Set(e)].sort().join('');
