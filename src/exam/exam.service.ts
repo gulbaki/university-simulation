@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { lastValueFrom, map } from 'rxjs';
+import { lastValueFrom } from 'rxjs';
 import  { performance } from 'perf_hooks';
 import {
   EXAM_MODEL,
@@ -44,59 +44,30 @@ export class ExamService {
       { name: 1, surname: 1, points: 1 },
     );
 
+    
+    
     const studentWithScore = [];
     const sortedStudentScore = [];
+    for (const student of students) {
+      const clearStudent = this.remDup(student.name + student.surname);
+      let points = 0;
+      for (const examQuestion of examArr) {
+        points += this.calculateScore(clearStudent, examQuestion.questions);
+      }
 
-    const promises = students.map((student, index) => {
-        const clearStudent = this.remDup(student.name + student.surname);
-        let points = 0;
-        for (const examQuestion of examArr) {
-          points += this.calculateScore(clearStudent, examQuestion.questions);
-        }
-  
-        sortedStudentScore.push({
-          points: points,
-          _id: student._id,
-        });
-        student.points = points;
-        studentWithScore.push({
-          updateOne: {
-            filter: { _id: student._id },
-            update: { $set: { points: student.points } },
-            upsert: false,
-          },
-        });
-
-      return
-   });
-    
-  const dataTest = await  Promise.all(promises)
-
-  dataTest
-  
-  
-    // const studentWithScore = [];
-    // const sortedStudentScore = [];
-    // for (const student of students) {
-    //   const clearStudent = this.remDup(student.name + student.surname);
-    //   let points = 0;
-    //   for (const examQuestion of examArr) {
-    //     points += this.calculateScore(clearStudent, examQuestion.questions);
-    //   }
-
-    //   sortedStudentScore.push({
-    //     points: points,
-    //     _id: student._id,
-    //   });
-    //   student.points = points;
-    //   studentWithScore.push({
-    //     updateOne: {
-    //       filter: { _id: student._id },
-    //       update: { $set: { points: student.points } },
-    //       upsert: false,
-    //     },
-    //   });
-    // }
+      sortedStudentScore.push({
+        points: points,
+        _id: student._id,
+      });
+      student.points = points;
+      studentWithScore.push({
+        updateOne: {
+          filter: { _id: student._id },
+          update: { $set: { points: student.points } },
+          upsert: false,
+        },
+      });
+    }
     sortedStudentScore.sort(function (a, b) {
       return b.points - a.points;
     });
