@@ -36,14 +36,9 @@ http://ec2-54-175-173-6.compute-1.amazonaws.com/api/v1/docs#/
 
 http://ec2-54-175-173-6.compute-1.amazonaws.com/
   
-## AWS Api Gateway   Addres
-ANY /students → ANY https://vjyvtcll2l.execute-api.us-east-1.amazonaws.com/v1 => students (HTTP)
+## AWS Api Gateway   Address
 
-
-ANY /universities → ANY https://vjyvtcll2l.execute-api.us-east-1.amazonaws.com/v1 => universities (HTTP)
-
-ANY /exam/start-exam → ANY https://vjyvtcll2l.execute-api.us-east-1.amazonaws.com/v1 => exam/start-exam (HTTP)
-
+https://vjyvtcll2l.execute-api.us-east-1.amazonaws.com/v1 
 
 ## API Endpoints
 GET `/students`
